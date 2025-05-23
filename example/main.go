@@ -3,11 +3,12 @@ package main
 import (
 	"fmt"
 	"os"
-	"uargs/args_parser"
+
+	-"github.com/utsav56/uargs"
 )
 
 func main() {
-	args := []args_parser.ArgDef{
+	args := []uargs.ArgDef{
 		{
 			Name: "index", Short: "i", Usage: "Shows item at particular given index",
 			NumArgs: 1, Required: false, Type: args_parser.Int,
@@ -18,7 +19,7 @@ func main() {
 		},
 	}
 
-	parser := args_parser.NewParser(args)
+	parser := uargs.NewParser(args)
 	parsed, err := parser.Parse()
 	if err != nil {
 		fmt.Println(err)

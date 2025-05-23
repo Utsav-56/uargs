@@ -1,5 +1,7 @@
-package args_parser
+package uargs
 
+// Package uargs provides a simple command-line argument parser for Go.
+// It allows you to define arguments with their names, short names, usage descriptions,
 
 import (
 	_ "errors"
@@ -19,20 +21,20 @@ const (
 )
 
 type ArgDef struct {
-	Name           string
-	Short          string
-	Usage          string
-	NumArgs        int
-	Required       bool
+	Name            string
+	Short           string
+	Usage           string
+	NumArgs         int
+	Required        bool
 	OptionalIfGiven []string
-	AcceptOverArgs bool
-	Type           ArgType
+	AcceptOverArgs  bool
+	Type            ArgType
 }
 
 type Parser struct {
-	defs map[string]ArgDef
+	defs        map[string]ArgDef
 	shortToLong map[string]string
-	parsed map[string]interface{}
+	parsed      map[string]interface{}
 }
 
 func NewParser(args []ArgDef) *Parser {
@@ -120,7 +122,7 @@ func (p *Parser) collectArgs(argv []string, i *int, def ArgDef) (interface{}, er
 		if strings.HasPrefix(next, "-") {
 			break
 		}
-		* i++
+		*i++
 		args = append(args, next)
 	}
 	if !def.AcceptOverArgs && len(args) > def.NumArgs {
