@@ -7,7 +7,7 @@ import (
 
 	// When used in your own projects, import from the repository:
 	// "github.com/yourusername/uargs"
-	// 
+	//
 	// For local development:
 	"uargs"
 )
@@ -23,17 +23,17 @@ func main() {
 			Type:     uargs.String,
 		},
 		{
-			Name:     "count",
-			Short:    "c",
-			Usage:    "Number of iterations",
-			Type:     uargs.Int,
+			Name:  "count",
+			Short: "c",
+			Usage: "Number of iterations",
+			Type:  uargs.Int,
 		},
 		{
-			Name:     "tags",
-			Short:    "t",
-			Usage:    "Up to 3 tags for categorization",
-			NumArgs:  3,
-			Type:     uargs.String,
+			Name:    "tags",
+			Short:   "t",
+			Usage:   "Up to 3 tags for categorization",
+			NumArgs: 3,
+			Type:    uargs.String,
 		},
 		{
 			Name:            "threshold",
@@ -44,16 +44,16 @@ func main() {
 			Type:            uargs.Float,
 		},
 		{
-			Name:     "verbose",
-			Short:    "v",
-			Usage:    "Enable verbose output",
-			Type:     uargs.String,
+			Name:  "verbose",
+			Short: "v",
+			Usage: "Enable verbose output",
+			Type:  uargs.String,
 		},
 	}
 
 	// Create a parser with the defined arguments
 	parser := uargs.NewParser(args)
-	
+
 	// Parse command-line arguments
 	parsed, err := parser.Parse()
 	if err != nil {
@@ -64,34 +64,34 @@ func main() {
 	}
 
 	// Access and use the parsed arguments with proper type assertions
-	
+
 	// String argument (required)
 	inputFile := parsed["input"].(string)
 	fmt.Printf("Input file: %s\n", inputFile)
-	
+
 	// Integer argument (optional)
 	if count, ok := parsed["count"]; ok {
 		countValue := count.(int)
 		fmt.Printf("Will perform %d iterations\n", countValue)
 	}
-	
+
 	// Multiple string arguments
 	if tags, ok := parsed["tags"]; ok {
 		tagList := tags.([]string)
 		fmt.Println("Tags:", tagList)
 	}
-	
+
 	// Float argument
 	if threshold, ok := parsed["threshold"]; ok {
 		thresholdValue := threshold.(float64)
 		fmt.Printf("Using threshold: %.2f\n", thresholdValue)
 	}
-	
+
 	// Flag argument
 	if _, ok := parsed["verbose"]; ok {
 		fmt.Println("Verbose mode enabled")
 	}
-	
+
 	fmt.Println("\nAll parsed arguments:")
 	fmt.Println(parsed)
 }

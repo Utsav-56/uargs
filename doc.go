@@ -11,7 +11,7 @@ with features such as:
   - Conditional requirements
   - Usage help generation
 
-Quick Start
+# Quick Start
 
 Define your arguments:
 
@@ -34,17 +34,17 @@ Create a parser and parse the arguments:
 Access the parsed values:
 
 	inputFile := parsed["input"].(string)
-	
+
 	if count, ok := parsed["count"]; ok {
 		iterations := count.(int)
 		// Use iterations...
 	}
-	
+
 	if _, ok := parsed["verbose"]; ok {
 		// Verbose mode is enabled
 	}
 
-Working with Different Types
+# Working with Different Types
 
 String arguments (default type):
 
@@ -61,7 +61,7 @@ Float arguments with automatic conversion:
 	{Name: "rate", Short: "r", Usage: "Rate value", Type: uargs.Float}
 	// Accessed as: parsed["rate"].(float64)
 
-Multi-value Arguments
+# Multi-value Arguments
 
 For arguments that accept multiple values:
 
@@ -69,7 +69,7 @@ For arguments that accept multiple values:
 	// Set NumArgs to the number of values expected
 	// Accessed as: parsed["tags"].([]string)
 
-Best Practices
+# Best Practices
 
 1. Always provide usage descriptions for your arguments
 2. Use required flag for mandatory arguments

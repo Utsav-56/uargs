@@ -11,7 +11,7 @@ package uargs
 //		{Name: "input", Short: "i", Usage: "Input file", Required: true, Type: uargs.String},
 //		{Name: "verbose", Short: "v", Usage: "Enable verbose output", Type: uargs.String},
 //	}
-//	
+//
 //	parser := uargs.NewParser(args)
 //	parsed, err := parser.Parse()
 //	if err != nil {
@@ -19,7 +19,7 @@ package uargs
 //		fmt.Println(parser.Usage())
 //		os.Exit(1)
 //	}
-//	
+//
 //	inputFile := parsed["input"].(string)
 
 import (
@@ -65,8 +65,8 @@ type ArgDef struct {
 
 // Parser represents a command-line argument parser
 type Parser struct {
-	defs        map[string]ArgDef    // Maps argument names to their definitions
-	shortToLong map[string]string    // Maps short names to their corresponding long names
+	defs        map[string]ArgDef      // Maps argument names to their definitions
+	shortToLong map[string]string      // Maps short names to their corresponding long names
 	parsed      map[string]interface{} // Stores parsed argument values
 }
 
@@ -103,10 +103,10 @@ func NewParser(args []ArgDef) *Parser {
 //		fmt.Println(err)
 //		os.Exit(1)
 //	}
-//	
+//
 //	// Access a string argument
 //	inputFile := parsed["input"].(string)
-//	
+//
 //	// Access an integer argument
 //	count, ok := parsed["count"]
 //	if ok {

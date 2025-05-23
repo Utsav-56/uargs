@@ -3,9 +3,10 @@ package main
 
 import (
 	"fmt"
-	"os"	// When used in your own projects, import from the repository:
+	"os" // When used in your own projects, import from the repository:
+
 	// "github.com/yourusername/uargs"
-	// 
+	//
 	// For local development:
 	"uargs"
 )
@@ -14,24 +15,24 @@ func main() {
 	// Define arguments with multiple values and conditional requirements
 	args := []uargs.ArgDef{
 		{
-			Name:     "file",
-			Short:    "f",
-			Usage:    "Input file",
-			Type:     uargs.String,
+			Name:  "file",
+			Short: "f",
+			Usage: "Input file",
+			Type:  uargs.String,
 		},
 		{
-			Name:     "tags",
-			Short:    "t",
-			Usage:    "Specify up to 3 tags for categorization",
-			NumArgs:  3,          // This argument expects up to 3 values
-			Type:     uargs.String,
+			Name:    "tags",
+			Short:   "t",
+			Usage:   "Specify up to 3 tags for categorization",
+			NumArgs: 3, // This argument expects up to 3 values
+			Type:    uargs.String,
 		},
 		{
-			Name:     "coords",
-			Short:    "c",
-			Usage:    "X and Y coordinates (requires 2 float values)",
-			NumArgs:  2,          // This argument expects exactly 2 values
-			Type:     uargs.Float,
+			Name:    "coords",
+			Short:   "c",
+			Usage:   "X and Y coordinates (requires 2 float values)",
+			NumArgs: 2, // This argument expects exactly 2 values
+			Type:    uargs.Float,
 		},
 		{
 			Name:            "template",
@@ -61,7 +62,7 @@ func main() {
 		// Multi-value arguments are returned as slices
 		tagsArr := tags.([]string)
 		fmt.Printf("Tags (%d provided): %v\n", len(tagsArr), tagsArr)
-		
+
 		// Access individual tag values
 		for i, tag := range tagsArr {
 			fmt.Printf("  Tag %d: %s\n", i+1, tag)
@@ -82,20 +83,20 @@ func main() {
 }
 
 /* Example usage:
-   
+
    # Providing multiple values for the "tags" argument
    go run main.go --tags red blue green
-   
+
    # Providing coordinates (must be valid floats)
    go run main.go --coords 10.5 20.3
-   
+
    # Using file argument makes template optional
    go run main.go --file data.txt
-   
+
    # Not using file argument means template is required
    go run main.go
    Error: missing required argument --template
-   
+
    # You can use the short format for all arguments
    go run main.go -f data.txt -t red blue green -c 10.5 20.3
 */
