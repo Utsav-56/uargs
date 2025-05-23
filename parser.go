@@ -2,6 +2,25 @@ package uargs
 
 // Package uargs provides a simple command-line argument parser for Go.
 // It allows you to define arguments with their names, short names, usage descriptions,
+// type checking, and validation. The package supports string, integer, and floating-point
+// argument types, as well as required arguments and conditional requirements.
+//
+// Basic usage example:
+//
+//	args := []uargs.ArgDef{
+//		{Name: "input", Short: "i", Usage: "Input file", Required: true, Type: uargs.String},
+//		{Name: "verbose", Short: "v", Usage: "Enable verbose output", Type: uargs.String},
+//	}
+//	
+//	parser := uargs.NewParser(args)
+//	parsed, err := parser.Parse()
+//	if err != nil {
+//		fmt.Println(err)
+//		fmt.Println(parser.Usage())
+//		os.Exit(1)
+//	}
+//	
+//	inputFile := parsed["input"].(string)
 
 import (
 	_ "errors"
@@ -12,31 +31,53 @@ import (
 	"strings"
 )
 
+// ArgType represents the data type of an argument value
 type ArgType string
 
 const (
+	// String indicates the argument value should be treated as a string
 	String ArgType = "string"
-	Int    ArgType = "int"
-	Float  ArgType = "float"
+	// Int indicates the argument value should be parsed as an integer
+	Int ArgType = "int"
+	// Float indicates the argument value should be parsed as a floating-point number
+	Float ArgType = "float"
 )
 
+// ArgDef defines the properties of a command-line argument
 type ArgDef struct {
-	Name            string
-	Short           string
-	Usage           string
-	NumArgs         int
-	Required        bool
+	// Name is the long name of the argument (used with --)
+	Name string
+	// Short is the single-character short name of the argument (used with -)
+	Short string
+	// Usage is a description of the argument for help text
+	Usage string
+	// NumArgs is the number of values expected for this argument (default: 1)
+	NumArgs int
+	// Required indicates whether the argument must be provided
+	Required bool
+	// OptionalIfGiven makes this argument optional if any of the listed arguments are provided
 	OptionalIfGiven []string
-	AcceptOverArgs  bool
-	Type            ArgType
+	// AcceptOverArgs allows accepting more values than specified by NumArgs
+	AcceptOverArgs bool
+	// Type specifies the data type of the argument value (String, Int, or Float)
+	Type ArgType
 }
 
+// Parser represents a command-line argument parser
 type Parser struct {
-	defs        map[string]ArgDef
-	shortToLong map[string]string
-	parsed      map[string]interface{}
+	defs        map[string]ArgDef    // Maps argument names to their definitions
+	shortToLong map[string]string    // Maps short names to their corresponding long names
+	parsed      map[string]interface{} // Stores parsed argument values
 }
 
+// NewParser creates a new Parser with the provided argument definitions
+//
+// Example:
+//
+//	args := []uargs.ArgDef{
+//		{Name: "config", Short: "c", Usage: "Config file path", Type: uargs.String},
+//	}
+//	parser := uargs.NewParser(args)
 func NewParser(args []ArgDef) *Parser {
 	defs := make(map[string]ArgDef)
 	shortToLong := make(map[string]string)
@@ -52,6 +93,25 @@ func NewParser(args []ArgDef) *Parser {
 	return &Parser{defs, shortToLong, make(map[string]interface{})}
 }
 
+// Parse parses command-line arguments and returns a map of argument names to their values.
+// It validates required arguments, checks for duplicates, and handles type conversions.
+//
+// Example:
+//
+//	parsed, err := parser.Parse()
+//	if err != nil {
+//		fmt.Println(err)
+//		os.Exit(1)
+//	}
+//	
+//	// Access a string argument
+//	inputFile := parsed["input"].(string)
+//	
+//	// Access an integer argument
+//	count, ok := parsed["count"]
+//	if ok {
+//		countValue := count.(int)
+//	}
 func (p *Parser) Parse() (map[string]interface{}, error) {
 	argv := os.Args[1:]
 	used := make(map[string]bool)
@@ -115,6 +175,9 @@ func (p *Parser) Parse() (map[string]interface{}, error) {
 	return p.parsed, nil
 }
 
+// collectArgs collects argument values from the command-line arguments.
+// It handles multi-value arguments and type conversion based on the argument definition.
+// This is an internal function used by the Parse method.
 func (p *Parser) collectArgs(argv []string, i *int, def ArgDef) (interface{}, error) {
 	args := []string{}
 	for j := 0; j < def.NumArgs && *i+1 < len(argv); j++ {
@@ -164,6 +227,17 @@ func (p *Parser) collectArgs(argv []string, i *int, def ArgDef) (interface{}, er
 	}
 }
 
+// Usage generates a formatted help text showing all defined arguments with their
+// names, short options, and usage descriptions. This is helpful for displaying
+// to users when invalid arguments are provided or when help is requested.
+//
+// Example:
+//
+//	if err != nil {
+//		fmt.Println(err)
+//		fmt.Println(parser.Usage())
+//		os.Exit(1)
+//	}
 func (p *Parser) Usage() string {
 	var b strings.Builder
 	b.WriteString("Usage:\n")
