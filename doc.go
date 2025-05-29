@@ -1,5 +1,5 @@
 /*
-Package github.com/utsav-56/uargs provides a simple, flexible command-line argument parser for Go applications.
+Package uargs provides a simple, flexible command-line argument parser for Go applications.
 
 This package allows developers to define, parse, and validate command-line arguments
 with features such as:
