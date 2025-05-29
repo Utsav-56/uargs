@@ -1,5 +1,5 @@
 /*
-Package uargs provides a simple, flexible command-line argument parser for Go applications.
+Package github.com/utsav-56/uargs provides a simple, flexible command-line argument parser for Go applications.
 
 This package allows developers to define, parse, and validate command-line arguments
 with features such as:
@@ -15,15 +15,15 @@ with features such as:
 
 Define your arguments:
 
-	args := []uargs.ArgDef{
-		{Name: "input", Short: "i", Usage: "Input file", Required: true, Type: uargs.String},
-		{Name: "count", Short: "c", Usage: "Number of iterations", Type: uargs.Int},
-		{Name: "verbose", Short: "v", Usage: "Enable verbose mode", Type: uargs.String},
+	args := []github.com/utsav-56/uargs.ArgDef{
+		{Name: "input", Short: "i", Usage: "Input file", Required: true, Type: github.com/utsav-56/uargs.String},
+		{Name: "count", Short: "c", Usage: "Number of iterations", Type: github.com/utsav-56/uargs.Int},
+		{Name: "verbose", Short: "v", Usage: "Enable verbose mode", Type: github.com/utsav-56/uargs.String},
 	}
 
 Create a parser and parse the arguments:
 
-	parser := uargs.NewParser(args)
+	parser := github.com/utsav-56/uargs.NewParser(args)
 	parsed, err := parser.Parse()
 	if err != nil {
 		fmt.Println(err)
@@ -48,24 +48,24 @@ Access the parsed values:
 
 String arguments (default type):
 
-	{Name: "file", Short: "f", Usage: "Input file", Type: uargs.String}
+	{Name: "file", Short: "f", Usage: "Input file", Type: github.com/utsav-56/uargs.String}
 	// Accessed as: parsed["file"].(string)
 
 Integer arguments with automatic conversion:
 
-	{Name: "count", Short: "c", Usage: "Count value", Type: uargs.Int}
+	{Name: "count", Short: "c", Usage: "Count value", Type: github.com/utsav-56/uargs.Int}
 	// Accessed as: parsed["count"].(int)
 
 Float arguments with automatic conversion:
 
-	{Name: "rate", Short: "r", Usage: "Rate value", Type: uargs.Float}
+	{Name: "rate", Short: "r", Usage: "Rate value", Type: github.com/utsav-56/uargs.Float}
 	// Accessed as: parsed["rate"].(float64)
 
 # Multi-value Arguments
 
 For arguments that accept multiple values:
 
-	{Name: "tags", Short: "t", Usage: "Tags", NumArgs: 3, Type: uargs.String}
+	{Name: "tags", Short: "t", Usage: "Tags", NumArgs: 3, Type: github.com/utsav-56/uargs.String}
 	// Set NumArgs to the number of values expected
 	// Accessed as: parsed["tags"].([]string)
 

@@ -1,14 +1,14 @@
-// This example demonstrates using different argument types in uargs
+// This example demonstrates using different argument types in github.com/utsav-56/uargs
 package main
 
 import (
 	"fmt"
 	"os" // When used in your own projects, import from the repository:
 
-	// "github.com/yourusername/uargs"
+	// "github.com/yourusername/github.com/utsav-56/uargs"
 	//
 	// For local development:
-	"uargs"
+	"github.com/utsav-56/uargs"
 )
 
 func main() {

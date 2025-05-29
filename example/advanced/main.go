@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"os" // When used in your own projects, import from the repository:
 
-	// "github.com/yourusername/uargs"
+	// "github.com/yourusername/github.com/utsav-56/uargs"
 	//
 	// For local development:
-	"uargs"
+	"github.com/utsav-56/uargs"
 )
 
 func main() {

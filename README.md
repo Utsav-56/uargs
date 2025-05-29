@@ -31,7 +31,7 @@
 To install the `uargs` library, use `go get`:
 
 ```bash
-go get github.com/utsav56/uargs
+go get github.com/utsav-56/github.com/utsav-56/uargs
 ```
 
 ## Quick Start

@@ -1,18 +1,18 @@
 package uargs
 
-// Package uargs provides a simple command-line argument parser for Go.
+// Package github.com/utsav-56/uargs provides a simple command-line argument parser for Go.
 // It allows you to define arguments with their names, short names, usage descriptions,
 // type checking, and validation. The package supports string, integer, and floating-point
 // argument types, as well as required arguments and conditional requirements.
 //
 // Basic usage example:
 //
-//	args := []uargs.ArgDef{
-//		{Name: "input", Short: "i", Usage: "Input file", Required: true, Type: uargs.String},
-//		{Name: "verbose", Short: "v", Usage: "Enable verbose output", Type: uargs.String},
+//	args := []github.com/utsav-56/uargs.ArgDef{
+//		{Name: "input", Short: "i", Usage: "Input file", Required: true, Type: github.com/utsav-56/uargs.String},
+//		{Name: "verbose", Short: "v", Usage: "Enable verbose output", Type: github.com/utsav-56/uargs.String},
 //	}
 //
-//	parser := uargs.NewParser(args)
+//	parser := github.com/utsav-56/uargs.NewParser(args)
 //	parsed, err := parser.Parse()
 //	if err != nil {
 //		fmt.Println(err)
@@ -74,10 +74,10 @@ type Parser struct {
 //
 // Example:
 //
-//	args := []uargs.ArgDef{
-//		{Name: "config", Short: "c", Usage: "Config file path", Type: uargs.String},
+//	args := []github.com/utsav-56/uargs.ArgDef{
+//		{Name: "config", Short: "c", Usage: "Config file path", Type: github.com/utsav-56/uargs.String},
 //	}
-//	parser := uargs.NewParser(args)
+//	parser := github.com/utsav-56/uargs.NewParser(args)
 func NewParser(args []ArgDef) *Parser {
 	defs := make(map[string]ArgDef)
 	shortToLong := make(map[string]string)

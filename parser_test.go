@@ -4,10 +4,10 @@ import (
 	"os"
 	"testing"
 
-	"uargs"
+	"github.com/utsav-56/uargs"
 )
 
-// Example_basic demonstrates basic usage of the uargs library
+// Example_basic demonstrates basic usage of the github.com/utsav-56/uargs library
 func Example_basic() {
 	// Save original args and restore after test
 	originalArgs := os.Args
